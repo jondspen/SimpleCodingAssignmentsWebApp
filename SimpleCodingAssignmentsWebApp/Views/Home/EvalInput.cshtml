@@ -1,0 +1,12 @@
+﻿@model SimpleCodingAssignmentsWebApp.Models.UserInputResult
+
+@{
+    ViewBag.Title = "EvalInput";
+}
+
+<h2>Evaluated User's Input</h2><br/>
+Input value: <b>@Html.DisplayFor(m => m.InputValue)</b><br/>
+Evaluation for FizzBuzz: <b>@Html.DisplayFor(m => m.FizzBuzzValue)</b><br/>
+Input was a paladrome: <b>@Model.IsPalindrome</b><br/>
+
+

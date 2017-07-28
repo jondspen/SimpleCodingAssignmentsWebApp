@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using SimpleCodingAssignmentsWebApp.Models;
 using System.Web.Mvc;
+using System;
 
 namespace SimpleCodingAssignmentsWebApp.Controllers
 {
@@ -15,16 +13,46 @@ namespace SimpleCodingAssignmentsWebApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult EvalInput(string userInput)
+        {
+            int userInt = 0;
+            UserInputResult uir = new UserInputResult() { InputValue = userInput, FizzBuzzValue = "Invlaid Input", IsPalindrome = false };
+
+            // Check for FizzBuzz (is input an integer)
+            if (int.TryParse(userInput, out userInt))
+            {
+                uir.FizzBuzzValue = userInt.ToString();
+                string FizzBuzzResult = "";
+
+                if ((userInt % 3) == 0)
+                {
+                    FizzBuzzResult = "Fizz";
+                }
+
+                if((userInt % 5) == 0)
+                {
+                    FizzBuzzResult += "Buzz";
+                }
+
+                if (!String.IsNullOrEmpty(FizzBuzzResult))
+                {
+                    uir.FizzBuzzValue = FizzBuzzResult;
+                }
+            }
+
+            // Check if input is a palindrome
+            uir.IsPalindrome = Utilities.GeneralUtilities.EvaluateForPalindrome(userInput.Replace(" ", string.Empty));
+
+            return View(uir);
         }
     }
 }

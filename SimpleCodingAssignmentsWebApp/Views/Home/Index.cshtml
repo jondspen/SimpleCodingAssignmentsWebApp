@@ -1,3 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+<div id="UserInputDiv">
+    Input text to evaluate: 
+    @using (Html.BeginForm("EvalInput", "Home", FormMethod.Post))
+    {
+    <input type="text" id="userInput" name="userInput"/>
+    <input type="submit" />
+    }
+</div>
